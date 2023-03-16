@@ -1,0 +1,24 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: gui
+  description: Micropets GUI Service
+  tags:
+    - web
+    - tanzu
+    - js
+    - ui
+  annotations:
+    "backstage.io/kubernetes-label-selector": "app.kubernetes.io/name=gui"
+    "github.com/project-slug": "bmoussaud/microgui-app/gui"
+  links:
+    - url: http://gui.dev-tap.apps.eu.aks.mytanzu.xyz/
+      title: "Micropets GUI "
+      icon: locallibrary
+spec:
+  type: website
+  lifecycle: experimental
+  owner: the-pet-team
+  system: micropets
+  consumesApis: [pets-api]
+  dependsOn: [Component:pets]
