@@ -14,6 +14,10 @@ spec:
     env:
       - name: BP_NODE_OPTIMIZE_MEMORY
         value: "true"
+      - name: BP_WEB_SERVER
+        value: "nginx"
+      - name: BP_NGINX_VERSION
+        value: "1.22.1"
   source:
     git:
       url: https://github.com/bmoussaud/micropets-gui-angular-js/
