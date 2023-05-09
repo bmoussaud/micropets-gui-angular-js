@@ -90,7 +90,9 @@ export class PetsComponent implements OnInit {
           }
         }
 
-        //console.log(urls)
+        console.log("refresh_one_by_one")
+        console.log(urls)
+        console.log("/refresh_one_by_one")
 
         this.petsService.getPets(urls)
           .subscribe((pets: any) => {
