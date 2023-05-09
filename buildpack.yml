@@ -1,5 +1,0 @@
-staticfile:
-  nginx:
-    pushstate: true
-    
-
