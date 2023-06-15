@@ -7,13 +7,16 @@ metadata:
     apps.tanzu.vmware.com/has-tests: "true"
     app.kubernetes.io/part-of: micropets
     app.kubernetes.io/name: gui
+    apis.apps.tanzu.vmware.com/register-api: "false"
   annotations:
     autoscaling.knative.dev/minScale: "1"
 spec:
   build:
     env:
-      - name: BP_NGINX_VERSION
-        value: "1.22.1"
+      - name: BP_NODE_VERSION
+        value: "v18.14.1"
+      - name: BP_LOG_LEVEL
+        value: "DEBUG"
   source:
     git:
       url: https://github.com/bmoussaud/micropets-gui-angular-js/
