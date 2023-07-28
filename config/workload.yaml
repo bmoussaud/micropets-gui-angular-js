@@ -14,7 +14,7 @@ spec:
   build:
     env:
       - name: BP_NODE_VERSION
-        value: "v18.14.1"
+        value: "v18.16.0  "
       - name: BP_LOG_LEVEL
         value: "DEBUG"
   source:
@@ -42,6 +42,6 @@ spec:
     - name: scanning_image_policy
       value: scan-policy-angular
     - name: userId
-      value: 1001
+      value: 1000
     - name: gitops_commit_message
       value: gui dev supplychain@cluster.local
