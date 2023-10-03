@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
-import { forkJoin, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-
+import { Injectable } from "@angular/core";
+import { forkJoin, Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { map } from "rxjs/operators";
 
 export interface PetsData {
   Total: number;
   Hostname: string;
-  Hostnames: (HostnamesEntity)[]
-  Pets: (PetsEntity)[]
+  Hostnames: HostnamesEntity[];
+  Pets: PetsEntity[];
 }
 export interface HostnamesEntity {
   Service: string;
@@ -25,13 +24,18 @@ export interface PetsEntity {
   URI: string;
 }
 
+export interface PetsConfig {
+  kind: string;
+  url: string;
+  driver: string;
+  hostname: string;
+}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class PetsService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public getPetsData(url: string): Observable<PetsData> {
     if (url == "/") {
@@ -45,13 +49,24 @@ export class PetsService {
     return this.http.get<PetsEntity>(url);
   }
 
+  public getConfig(url: string, kind: string): Observable<PetsConfig> {
+    console.log("/pets/" + kind + "/config");
+    if (url == "/") {
+      return this.http.get<PetsConfig>("/pets/" + kind + "/config");
+    } else {
+      return this.http.get<PetsConfig>(url + "/pets/" + kind + "/config");
+    }
+  }
+
   public getPets(urls: string[]): Observable<PetsEntity[]> {
     // firstly, start out with an array of observable arrays
-    const observables: Observable<PetsEntity>[] = urls.map(url => this.getPet(url));
+    const observables: Observable<PetsEntity>[] = urls.map((url) =>
+      this.getPet(url)
+    );
     // run all observables in parallel with forkJoin
     return forkJoin(observables).pipe(
       // now map the array of arrays to a flattened array
-      map(pets => pets)
+      map((pets) => pets)
     );
   }
 }
