@@ -1,73 +1,74 @@
-<div class="petscontainer">
-  <mat-toolbar>
-    <span>Micropets</span>
-  </mat-toolbar>
+<div class="corner-ribbon top-right sticky {{ env_color }}">{{ env }}</div>
+<mat-toolbar>
+  <span>Micropets</span>
+</mat-toolbar>
 
-  <div class="corner-ribbon top-right sticky {{ env_color }}">{{ env }}</div>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 
-  <div>
-    <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row
+          [ngClass]="row.Type"
+          *matRowDef="let row; columns: displayedColumns"
+        ></mat-row>
 
-      <mat-row
-        [ngClass]="row.Type"
-        *matRowDef="let row; columns: displayedColumns"
-      ></mat-row>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Name</mat-header-cell
+          >
+          <mat-cell *matCellDef="let element">{{ element.Name }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="kind">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Kind</mat-header-cell
+          >
+          <mat-cell *matCellDef="let element">{{ element.Kind }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="age">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Age</mat-header-cell
+          >
+          <mat-cell *matCellDef="let element">{{
+            element.Age
+          }}</mat-cell> </ng-container
+        >s
+        <ng-container matColumnDef="pic">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >Url</mat-header-cell
+          >
+          <mat-cell *matCellDef="let element"
+            ><img style="height: 100px; width: 100px" [src]="element.URL"
+          /></mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="from">
+          <mat-header-cell *matHeaderCellDef mat-sort-header
+            >From</mat-header-cell
+          >
+          <mat-cell *matCellDef="let element">{{ element.From }}</mat-cell>
+        </ng-container>
+      </mat-table>
+    </div>
 
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header
-          >Name</mat-header-cell
-        >
-        <mat-cell *matCellDef="let element">{{ element.Name }}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="kind">
-        <mat-header-cell *matHeaderCellDef mat-sort-header
-          >Kind</mat-header-cell
-        >
-        <mat-cell *matCellDef="let element">{{ element.Kind }}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="age">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Age</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{
-          element.Age
-        }}</mat-cell> </ng-container
-      >s
-      <ng-container matColumnDef="pic">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Url</mat-header-cell>
-        <mat-cell *matCellDef="let element"
-          ><img style="height: 100px; width: 100px" [src]="element.URL"
-        /></mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="from">
-        <mat-header-cell *matHeaderCellDef mat-sort-header
-          >From</mat-header-cell
-        >
-        <mat-cell *matCellDef="let element">{{ element.From }}</mat-cell>
-      </ng-container>
-    </mat-table>
+    <div class="col-4">
+      <div class="container">
+        <div class="row g-2">
+          <div class="col" *ngFor="let item of configuration">
+            <div class="p-3 border bg-light">
+              <ngb-toast header="{{ item.kind }}" [autohide]="false">
+                <ul>
+                  <li>{{ item.hostname }}</li>
+                  <li>{{ item.driver }}</li>
+                  <li>{{ item.url }}</li>
+                </ul>
+              </ngb-toast>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div>
-    <mat-grid-list cols="4" rowHeight="170px" gutterSize="5px">
-      <mat-grid-tile *ngFor="let c of configuration">
-        <mat-card >
-          <mat-card-header>
-            <mat-card-title>{{ c.kind }}</mat-card-title>
-          </mat-card-header>
-         
-          <mat-card-content>
-            {{ c.url }}
-            
-          </mat-card-content>
-          <mat-grid-tile-footer>
-            {{ c.driver }}
-          </mat-grid-tile-footer>
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </div>
-
-  
 
   <a
     href="https://github.com/bmoussaud/micropets-app"

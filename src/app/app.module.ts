@@ -7,6 +7,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { ConfigAssetLoaderService} from './config-asset-loader.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ConfigAssetLoaderService} from './config-asset-loader.service';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    NgbModule
   ],
   providers: [{
     provide: APP_INITIALIZER,
