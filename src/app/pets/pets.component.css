@@ -24,3 +24,16 @@
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
+/** No CSS for this example */
+mat-card-header {
+    Xbackground: #12121212;
+}
+
+mat-grid-tile {    
+    background-color: rgb(147, 18, 80);
+}
+
+mat-card-content {
+    bXackground-color: blue;
+}

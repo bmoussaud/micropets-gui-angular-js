@@ -28,12 +28,12 @@ export class PetsComponent implements OnInit {
   public hostnamesstr: string = "";
   public env_color: string = "pink";
   public dataSource!: MatTableDataSource<any>;
-  public dataSourceHostnames!: MatTableDataSource<any>;
-  public configuration: Map<string, PetsConfig> = new Map();
-
+  public dataSourceConfiguration!: MatTableDataSource<PetsConfig>;
+  public configuration: PetsConfig[] = [];
   public config!: Configuration;
 
   displayedColumns = ["name", "kind", "age", "pic", "from"];
+  displayedConfigColumns = ["kind", "hostname", "driver", "url"];
 
   constructor(
     private location: Location,
@@ -43,7 +43,7 @@ export class PetsComponent implements OnInit {
     this.configService.loadConfigurations().subscribe(
       (data: Configuration) =>
         (this.config = {
-          petServiceUrl: "/",
+          petServiceUrl: data.petServiceUrl,
           stage: data.stage,
           stage_color: data.stage_color,
           load_one_by_one: data.load_one_by_one,
@@ -85,7 +85,6 @@ export class PetsComponent implements OnInit {
         this.env = this.config.stage;
         this.env_color = this.config.stage_color;
         this.dataSource = new MatTableDataSource(this.pets);
-        this.dataSourceHostnames = new MatTableDataSource(this.hostnames);
       });
   }
 
@@ -123,25 +122,30 @@ export class PetsComponent implements OnInit {
         });
 
         this.hostnames = result["Hostnames"];
-        var h: string[] = new Array(this.hostnames.length);
         for (let index = 0; index < this.hostnames.length; index++) {
           const element = this.hostnames[index];
-          h[index] = element.Hostname;
+          if (element.Service == "pets") {
+            continue;
+          }
           this.petsService
-            .getConfig(this.config.petServiceUrl, element.Service)
-            .subscribe((pc: PetsConfig) => {
-              pc.hostname = this.get_host_name_by_service(pc.kind);
-              this.configuration.set(element.Service, pc);
+            .getConfig(this.config.petServiceUrl)
+            .pipe(map((result) => result))
+            .subscribe((result) => {
+              this.configuration = result;
+              console.log("configuration");
+              console.log(this.configuration);
+              console.log("/configuration");
+              this.dataSourceConfiguration = new MatTableDataSource<PetsConfig>(
+                this.configuration
+              );
             });
         }
         console.log("--->");
         console.log(this.configuration);
         console.log("<---");
-        this.hostnamesstr = h.join(", ");
 
         this.env = this.config.stage;
         this.env_color = this.config.stage_color;
-        this.dataSourceHostnames = new MatTableDataSource(this.hostnames);
       });
   }
 }
