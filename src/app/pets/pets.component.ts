@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, isDevMode } from "@angular/core";
 import { Location } from "@angular/common";
 import { concatMap, map, mergeMap } from "rxjs/operators";
 import { MatLegacyTableDataSource as MatTableDataSource } from "@angular/material/legacy-table";
@@ -43,7 +43,7 @@ export class PetsComponent implements OnInit {
     this.configService.loadConfigurations().subscribe(
       (data: Configuration) =>
         (this.config = {
-          petServiceUrl: data.petServiceUrl,
+          petServiceUrl: isDevMode() ? data.petServiceUrl : "/", 
           stage: data.stage,
           stage_color: data.stage_color,
           load_one_by_one: data.load_one_by_one,

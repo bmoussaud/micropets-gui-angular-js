@@ -27,9 +27,12 @@ export class ConfigAssetLoaderService {
 
   public loadConfigurations(): any {
     if (isDevMode()) {
-      console.log("Development!");
+      console.log("!!!!!!! Development!");
+      console.log("petServiceUrl " + this.defaultConfiguration.petServiceUrl);
+
       this.configuration$ = of<Configuration>(this.defaultConfiguration);
     } else {
+      console.log("!!!!!!! Production!");
       if (!this.configuration$) {
         this.configuration$ = this.http
           .get<Configuration>(this.CONFIG_URL)
