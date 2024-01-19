@@ -2,14 +2,13 @@ apiVersion: carto.run/v1alpha1
 kind: Workload
 metadata:
   name: gui-angular-js
+  namespace: micropets-int
   labels:
     apps.tanzu.vmware.com/workload-type: web
     apps.tanzu.vmware.com/has-tests: "true"
     app.kubernetes.io/part-of: micropets
     app.kubernetes.io/name: gui
     apis.apps.tanzu.vmware.com/register-api: "false"
-  annotations:
-    autoscaling.knative.dev/minScale: "1"
 spec:
   build:
     env:
@@ -42,4 +41,4 @@ spec:
     - name: scanning_image_policy
       value: scan-policy-angular
     - name: gitops_commit_message
-      value: gui dev supplychain@cluster.local
+      value: gui int supplychain@cluster.local
