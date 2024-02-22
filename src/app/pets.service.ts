@@ -38,7 +38,7 @@ export class PetsService {
   constructor(private http: HttpClient) {}
 
   public getPetsData(url: string): Observable<PetsData> {
-    console.log("getPetsData " + url);
+    console.log(">getPetsData " + url);
     if (url == "/") {
       return this.http.get<PetsData>("/pets");
     } else {
@@ -51,7 +51,7 @@ export class PetsService {
   }
 
   public getConfig(url: string): Observable<PetsConfig[]> {
-    console.log("getConfig /pets/config");
+    console.log(">getConfig /pets/config");
     if (url == "/") {
       return this.http.get<PetsConfig[]>("/pets/config");
     } else {

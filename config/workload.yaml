@@ -32,7 +32,7 @@ spec:
     - name: SERVICE_BINDING_ROOT
       value: "/workspace/dist/assets"
     - name: PETS_SERVICE
-      value: http://pets-golang.micropets-int/pets
+      value: https://micropets-gateway.micropets-dev/micropets/pets
   params:
     - name: testing_pipeline_matching_labels
       value:

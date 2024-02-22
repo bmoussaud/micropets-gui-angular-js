@@ -17,7 +17,7 @@ export class ConfigAssetLoaderService {
   private configuration$!: Observable<Configuration>;
 
   private defaultConfiguration: Configuration = {
-    petServiceUrl: "https://pets-golang.micropets-dev.16x.tanzu.moussaud.org",
+    petServiceUrl: "https://gateway-dev.18x.tanzu.moussaud.org/micropets",
     stage: "localdev",
     stage_color: "blue",
     load_one_by_one: "True",
