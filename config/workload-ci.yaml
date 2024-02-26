@@ -29,9 +29,9 @@ spec:
         name: gui-config
   env:
     - name: SERVICE_BINDING_ROOT
-      value: "/workspace/dist/assets"
-    - name: PETS_SERVICE
-      value: https://micropets-gateway.micropets-int/micropets/pets
+      value: "/workspace/dist/assets"    
+    - name: GATEWAY_SERVICE
+      value: https://micropets-gateway.micropets-int
   params:
     - name: testing_pipeline_matching_labels
       value:
